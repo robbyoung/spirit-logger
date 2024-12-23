@@ -9,7 +9,7 @@
 
 	let datePlayed: DateValue | undefined = $state(today(getLocalTimeZone()));
 
-	let spirits: Array<SpiritId | undefined> = $state([SpiritId.Lightning]);
+	let spirits: Array<SpiritId | undefined> = $state([undefined]);
 
 	function addSpirit() {
 		spirits.push(undefined);
@@ -31,10 +31,8 @@
 				<div>
 					<Label for="spirits">Spirits</Label>
 					<fieldset id="spirits" class="flex flex-col gap-1">
-
 						{#each spirits as _, i}
-								<SpiritSelect id={`spirit-${i}`} bind:value={spirits[i]} placeholder={`Player ${i + 1} Spirit`}></SpiritSelect>
-								
+							<SpiritSelect id={`spirit-${i}`} bind:value={spirits[i]} placeholder={`Player ${i + 1} Spirit`}></SpiritSelect>
 						{/each}
 						
 						{#if spirits.length < 6}
@@ -42,7 +40,7 @@
 						{/if}
 					</fieldset>
 				</div>
-				
+
 				<Button>Submit</Button>
 			</div>
 		</form>

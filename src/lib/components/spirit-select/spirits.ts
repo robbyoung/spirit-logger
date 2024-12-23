@@ -1,12 +1,12 @@
 export enum SpiritId {
-	Lightning,
-	Earth,
-	River,
-	Shadows,
-	Thunderspeaker,
-	Green,
-	Ocean,
-	Bringer
+	Lightning = 'LSS',
+	Earth = 'VSE',
+	River = 'RSS',
+	Shadows = 'SFF',
+	Thunderspeaker = 'TSR',
+	Green = 'SRG',
+	Ocean = 'OHG',
+	Bringer = 'BDN'
 }
 
 export interface Spirit {
