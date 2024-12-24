@@ -6,13 +6,21 @@
 	import {Label} from "../ui/label";
 	import SpiritSelect from '../spirit-select/spirit-select.svelte';
 	import { SpiritId } from "../spirit-select/spirits";
+	import type { AdversaryId } from "../adversary-select/adversaries";
+	import AdversarySelect from "../adversary-select/adversary-select.svelte";
 
 	let datePlayed: DateValue | undefined = $state(today(getLocalTimeZone()));
 
 	let spirits: Array<SpiritId | undefined> = $state([undefined]);
 
+	let adversaries: Array<AdversaryId | undefined> = $state([undefined]);
+
 	function addSpirit() {
 		spirits.push(undefined);
+	}
+
+	function addAdversary() {
+		adversaries.push(undefined);
 	}
 </script>
 
@@ -37,6 +45,19 @@
 						
 						{#if spirits.length < 6}
 							<Button variant="outline" on:click={addSpirit}>Add another Spirit</Button>
+						{/if}
+					</fieldset>
+				</div>
+
+				<div>
+					<Label for="adversaries">Adversaries</Label>
+					<fieldset id="adversaries" class="flex flex-col gap-1">
+						{#each adversaries as _, i}
+							<AdversarySelect id={`adversary-${i}`} bind:value={adversaries[i]} placeholder={`Select an Adversary`}></AdversarySelect>
+						{/each}
+						
+						{#if spirits.length < 5}
+							<Button variant="outline" on:click={addAdversary}>Add another Adversary</Button>
 						{/if}
 					</fieldset>
 				</div>
