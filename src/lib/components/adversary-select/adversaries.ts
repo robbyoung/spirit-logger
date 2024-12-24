@@ -166,7 +166,7 @@ export const adversaries: Adversary[] = [
 	},
 	{
 		id: AdversaryId.HabsburgLivestock,
-		name: 'Habsburg Monarch (Livestock Colony)',
+		name: 'Habsburg Monarchy (Livestock Colony)',
 		imageUrl: `${BASE_IMAGE_PATH}/habsburg-livestock.png`,
 		levels: [
 			{

@@ -9,18 +9,29 @@
 	import type { AdversaryId } from "../adversary-select/adversaries";
 	import AdversarySelect from "../adversary-select/adversary-select.svelte";
 
+	interface AdversaryWithLevel {
+		id: AdversaryId | undefined;
+		level: number | undefined;
+	}
+
 	let datePlayed: DateValue | undefined = $state(today(getLocalTimeZone()));
 
 	let spirits: Array<SpiritId | undefined> = $state([undefined]);
 
-	let adversaries: Array<AdversaryId | undefined> = $state([undefined]);
+	let adversaries: Array<AdversaryWithLevel> = $state([{
+		id: undefined,
+		level: undefined,
+	}]);
 
 	function addSpirit() {
 		spirits.push(undefined);
 	}
 
 	function addAdversary() {
-		adversaries.push(undefined);
+		adversaries.push({
+			id: undefined,
+			level: undefined,
+		});
 	}
 </script>
 
@@ -53,10 +64,10 @@
 					<Label for="adversaries">Adversaries</Label>
 					<fieldset id="adversaries" class="flex flex-col gap-1">
 						{#each adversaries as _, i}
-							<AdversarySelect id={`adversary-${i}`} bind:value={adversaries[i]} placeholder={`Select an Adversary`}></AdversarySelect>
+							<AdversarySelect id={`adversary-${i}`} bind:value={adversaries[i].id} bind:level={adversaries[i].level} placeholder={`Select an Adversary`}></AdversarySelect>
 						{/each}
 						
-						{#if spirits.length < 5}
+						{#if adversaries.length < 5}
 							<Button variant="outline" on:click={addAdversary}>Add another Adversary</Button>
 						{/if}
 					</fieldset>

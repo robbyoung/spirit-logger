@@ -2,14 +2,16 @@
 	import * as Avatar from "../ui/avatar";
     import * as Select from "../ui/select";
 	import { AdversaryId, adversaries, type Adversary } from "./adversaries";
+	import AdversaryLevelSelect from "./adversary-level-select.svelte";
 
     interface Props {
         id: string;
         placeholder: string;
         value: AdversaryId | undefined;
+        level: number | undefined;
     }
 
-    let { id, placeholder, value = $bindable() }: Props = $props();
+    let { id, placeholder, value = $bindable(), level = $bindable() }: Props = $props();
 
     let selectedAdversary: Adversary | undefined = $derived(adversaries.find(a => a.id === value))
 
@@ -44,3 +46,5 @@
     </Select.Content>
     <Select.Input name={id} bind:value />
   </Select.Root>
+
+  <AdversaryLevelSelect adversary={selectedAdversary} bind:value={level}/>
