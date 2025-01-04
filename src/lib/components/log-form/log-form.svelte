@@ -6,8 +6,9 @@
 	import {Label} from "../ui/label";
 	import SpiritSelect from '../spirit-select/spirit-select.svelte';
 	import { SpiritId } from "../spirit-select/spirits";
-	import type { AdversaryId } from "../adversary-select/adversaries";
+	import { adversaries as allAdversaries, type AdversaryId } from "../adversary-select/adversaries";
 	import AdversarySelect from "../adversary-select/adversary-select.svelte";
+	import ScoreCalculator from "../score-calculator/score-calculator.svelte";
 
 	interface AdversaryWithLevel {
 		id: AdversaryId | undefined;
@@ -22,6 +23,14 @@
 		id: undefined,
 		level: undefined,
 	}]);
+
+	let difficulty = $derived(adversaries.map(adversary => {
+		if (adversary.id === undefined || adversary.level === undefined) {
+			return 0;
+		}
+
+		return allAdversaries.find(a => a.id === adversary.id)?.levels[adversary.level].difficulty ?? 0;
+	}).reduce((accumulator, currentValue) => accumulator + currentValue));
 
 	function addSpirit() {
 		spirits.push(undefined);
@@ -72,6 +81,8 @@
 						{/if}
 					</fieldset>
 				</div>
+
+				<ScoreCalculator difficulty={difficulty} spiritCount={spirits.length}/>
 
 				<Button>Submit</Button>
 			</div>
