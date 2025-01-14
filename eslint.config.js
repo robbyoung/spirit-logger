@@ -30,5 +30,14 @@ export default ts.config(
         parser: ts.parser
       }
     }
+  },
+  {
+    files: ['**/*.js', '**/*.ts', '**/*.svelte'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
+    }
+  },
+  {
+    ignores: ['**/src/lib/components/ui/**/*']
   }
 );
