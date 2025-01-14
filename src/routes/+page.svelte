@@ -1,6 +1,5 @@
 <script>
-	import LogForm from "$lib/components/log-form/log-form.svelte";
-
+  import LogForm from '$lib/components/log-form/log-form.svelte';
 </script>
 
-<LogForm/>
+<LogForm />
